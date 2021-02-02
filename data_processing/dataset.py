@@ -55,7 +55,7 @@ class Dataset:
         mask = np.ones(shape)
         mask = mask + k * np.random.standard_normal(shape) ### adding noise to multiplicator
         mask = mask * np.random.choice((0,1), size=shape, p = [0.10, 0.90]) ### zero value for 10% of elements
-        
+        mask = np.clip(mask, 1e-2, 20) # negative values lead to unwanted behaviour
         return mask * clean_mag
         
     def parallel_audio_processing(self, clean_filename):
